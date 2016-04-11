@@ -5,12 +5,22 @@
 		<style type="text/css">
 			* { margin: 0; padding: 0; box-sizing: border-box; }
 			body { font: 13px Helvetica, Arial; }
-			form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-			form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-			form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+			form#inputMessage { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+			form#inputMessage input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+			form#inputMessage button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
 			#messages { list-style-type: none; margin: 0; padding: 0; }
 			#messages li { padding: 5px 10px; }
 			#messages li:nth-child(odd) { background: #eee; }
+
+			#contentWrap{
+				width: 400px;
+				height: auto;
+				border: 2px solid black;
+				margin: 30px;
+			}
+			#inputNameWrap{
+				margin: 30px;
+			}
 		</style>
 	</head>
 
@@ -20,30 +30,29 @@
 
 	<body>
 
-		<!-- <div id="inputNameWrap">
-			<form>
-				<input type="text" name="username"><button type="submit">Register</button>
-			</form>
-		</div>
+			<div id="inputNameWrap">
+				<form>
+					<input type="text" name="username">
+					<button type="submit">Register</button>
+				</form>
+			</div>
 
-		<div id="contentWrap">
-			<textarea cols="5">
-				
-			</textarea>
-		</div>
+			<div id="contentWrap" >
+				<ul id="messages"></ul>
+			</div>
 
-		<div id="inputMessage">
-			
-		</div> -->
-		<ul id="messages"></ul>
-		    <form action="#">
-		      <input id="m" autocomplete="off" /><button>Send</button>
-		    </form>
+			<div id="inputMessageWrap">
+			    <form action="#" id="inputMessage">
+			      <input id="m" autocomplete="off" /><button>Send</button>
+			    </form>
+			</div>
+		
 	</body>
 
 
 
 	<script >
+			// connect to the socket
 		var socket = io();
 		   	// emit event when submit form
 		$('form').submit(function(event) {
@@ -62,7 +71,7 @@
 
 		// notify connected users when a user connect/disconnect
 		socket.on('notifyConnectedUsers', function(msg) { // socket.on(‘eventName’, callback){}
-			$('#messages').append($('<li style="color:red">').text('*'+msg));
+			$('#messages').append($('<li style="color:red;background:yellow;">').text('*'+msg));
 		});
 	</script>
 </html>
