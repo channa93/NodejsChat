@@ -15,11 +15,11 @@ io.on('connection', function(socket) {
 	socket.on('sendMessage', function(message) {
 		console.log(message);
 	});
-		console.log('chat message: '+msg);
+		
 		//Each socket also fires a special disconnect event. This will fire when we disconnect. i.e: refresh browser
-	socket.on('disconnect', function() {
-		console.log('user disconnected');
-	}) 
+	// socket.on('disconnect', function() {
+	// 	console.log('user disconnected');
+	// }) 
 });
 
 

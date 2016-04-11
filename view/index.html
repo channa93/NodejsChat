@@ -18,23 +18,23 @@
 	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.js"></script>
 
-	<script >
-		var socket = io();
-
-		// emit event when submit form
-		$('form').submit(function(event) {
-			socket.emit('sendMessage', $('#m').val()); // socket.emit('eventName',data)
-			$('#m').val('');
-			return false;
-		});
-	</script>
-
-
-
 	<body>
 		<ul id="messages"></ul>
-		    <form action="">
+		    <form action="#">
 		      <input id="m" autocomplete="off" /><button>Send</button>
 		    </form>
 	</body>
+
+
+
+	<script >
+		var socket = io();
+		   	// emit event when submit form
+		$('form').submit(function(event) {
+			var message = $('#m').val();alert(message);
+			socket.emit('sendMessage', message); // socket.emit('eventName',data)
+			$('#m').val('');
+			event.preventDefault();
+		});
+	</script>
 </html>
