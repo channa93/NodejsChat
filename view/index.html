@@ -19,6 +19,22 @@
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.js"></script>
 
 	<body>
+
+		<!-- <div id="inputNameWrap">
+			<form>
+				<input type="text" name="username"><button type="submit">Register</button>
+			</form>
+		</div>
+
+		<div id="contentWrap">
+			<textarea cols="5">
+				
+			</textarea>
+		</div>
+
+		<div id="inputMessage">
+			
+		</div> -->
 		<ul id="messages"></ul>
 		    <form action="#">
 		      <input id="m" autocomplete="off" /><button>Send</button>
@@ -31,10 +47,22 @@
 		var socket = io();
 		   	// emit event when submit form
 		$('form').submit(function(event) {
-			var message = $('#m').val();alert(message);
+			var message = $('#m').val(); $('#m').val('');
+				// emit event to server
 			socket.emit('sendMessage', message); // socket.emit('eventName',data)
-			$('#m').val('');
 			event.preventDefault();
+		});
+
+		/** listen event from server*/
+
+		// send message
+		socket.on('sendMessage', function(msg){ // socket.on(‘eventName’, callback){}     //second param is the callback function returning from server 
+		    $('#messages').append($('<li>').text(msg));
+		});
+
+		// notify connected users when a user connect/disconnect
+		socket.on('notifyConnectedUsers', function(msg) { // socket.on(‘eventName’, callback){}
+			$('#messages').append($('<li style="color:red">').text('*'+msg));
 		});
 	</script>
 </html>
